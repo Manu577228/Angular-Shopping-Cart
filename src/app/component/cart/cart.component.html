@@ -1,13 +1,10 @@
 <table
   mat-table
+  #table
   [dataSource]="products"
   class="mat-elevation-z8"
   *ngIf="products.length != 0"
 >
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>No.</th>
     <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
@@ -18,7 +15,6 @@
     <td mat-cell *matCellDef="let element">{{ element.title }}</td>
   </ng-container>
 
-  <!-- Weight Column -->
   <ng-container matColumnDef="image">
     <th mat-header-cell *matHeaderCellDef>Product Image</th>
     <td mat-cell *matCellDef="let element">
