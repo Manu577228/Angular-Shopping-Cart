@@ -1,4 +1,88 @@
-<ng-container *ngIf="products.length != 0">
+<table
+  mat-table
+  [dataSource]="products"
+  class="mat-elevation-z8"
+  *ngIf="products.length != 0"
+>
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Product Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef>Product Image</th>
+    <td mat-cell *matCellDef="let element">
+      <img
+        style="width: 60px; cursor: pointer"
+        src="{{ element.image }}"
+        alt=""
+      />
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef>Price</th>
+    <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+    <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef>Total</th>
+    <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">
+      <button class="btn btn-danger" (click)="removeItem(element)">
+        <i class="fas fa-trash-alt"></i>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<div style="padding-left: 1rem">
+  <tr
+    *ngIf="products.length != 0"
+    style="display: flex; justify-content: flex-end"
+  >
+    <td></td>
+    <td>
+      <button (click)="emptycart()" class="btn btn-danger">Empty Cart</button>
+    </td>
+    <td>
+      <button routerLink="/products" class="btn btn-primary">Shop More</button>
+    </td>
+    <td><button class="btn btn-success">Checkout</button></td>
+    <td>
+      <em style="font-weight: bold">Your Grand Total : ₹{{ grandTotal }}</em>
+    </td>
+  </tr>
+</div>
+
+<!-- <ng-container *ngIf="products.length != 0">
   <div class="container">
     <div class="card-table">
       <div class="cart-product">
@@ -62,7 +146,7 @@
       </div>
     </div>
   </div>
-</ng-container>
+</ng-container> -->
 
 <ng-container *ngIf="products.length == 0">
   <div class="container">
